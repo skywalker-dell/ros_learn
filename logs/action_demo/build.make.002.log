@@ -1,0 +1,64 @@
+[35m[1mScanning dependencies of target roscpp_generate_messages_eus[0m
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoActionGoal
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoFeedback
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoActionResult
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoResult
+[  0%] Built target actionlib_msgs_generate_messages_lisp
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoAction
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target actionlib_msgs_generate_messages_py
+[  0%] Built target actionlib_msgs_generate_messages_cpp
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_eus[0m
+[  0%] Built target actionlib_msgs_generate_messages_nodejs
+[35m[1mScanning dependencies of target roscpp_generate_messages_py[0m
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoGoal
+[  0%] Built target std_msgs_generate_messages_nodejs
+[35m[1mScanning dependencies of target actionlib_generate_messages_eus[0m
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_py[0m
+[35m[1mScanning dependencies of target actionlib_generate_messages_nodejs[0m
+[  0%] Built target _action_demo_generate_messages_check_deps_ActionDemoActionFeedback
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target actionlib_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[  0%] Built target actionlib_generate_messages_nodejs
+[35m[1mScanning dependencies of target roscpp_generate_messages_lisp[0m
+[35m[1mScanning dependencies of target actionlib_generate_messages_lisp[0m
+[35m[1mScanning dependencies of target _catkin_empty_exported_target[0m
+[35m[1mScanning dependencies of target actionlib_generate_messages_py[0m
+[  0%] Built target _catkin_empty_exported_target
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_lisp[0m
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target actionlib_generate_messages_lisp
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_nodejs[0m
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target actionlib_generate_messages_py
+[35m[1mScanning dependencies of target actionlib_generate_messages_cpp[0m
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target actionlib_msgs_generate_messages_eus
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_cpp[0m
+[35m[1mScanning dependencies of target roscpp_generate_messages_cpp[0m
+[35m[1mScanning dependencies of target roscpp_generate_messages_nodejs[0m
+[  0%] Built target actionlib_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[ 20%] Built target action_demo_generate_messages_py
+[ 20%] Built target roscpp_generate_messages_nodejs
+[ 38%] Built target action_demo_generate_messages_lisp
+[ 56%] Built target action_demo_generate_messages_cpp
+[ 76%] Built target action_demo_generate_messages_eus
+[ 94%] Built target action_demo_generate_messages_nodejs
+[35m[1mScanning dependencies of target srv[0m
+[ 94%] Built target action_demo_generate_messages
+[ 97%] [32mBuilding CXX object CMakeFiles/srv.dir/src/action_server.cpp.o[0m
+[01m[K/home/zwx/Documents/ros/learn/src/action_demo/src/action_server.cpp:3:10:[m[K [01;31m[Kfatal error: [m[Kaction_demo/AddIntsAction.h: No such file or directory
+    3 | #include [01;31m[K"action_demo/AddIntsAction.h"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/srv.dir/build.make:63: CMakeFiles/srv.dir/src/action_server.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:517: CMakeFiles/srv.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2

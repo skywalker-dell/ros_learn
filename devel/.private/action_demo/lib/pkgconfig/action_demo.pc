@@ -1,0 +1,8 @@
+prefix=/home/zwx/Documents/ros/learn/devel/.private/action_demo
+
+Name: action_demo
+Description: Description of action_demo
+Version: 0.0.0
+Cflags: -I/home/zwx/Documents/ros/learn/devel/.private/action_demo/include
+Libs: -L${prefix}/lib 
+Requires: actionlib actionlib_msgs roscpp rospy std_msgs

@@ -1,0 +1,8 @@
+prefix=/home/zwx/Documents/ros/learn/install
+
+Name: action_demo
+Description: Description of action_demo
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: actionlib actionlib_msgs roscpp rospy std_msgs

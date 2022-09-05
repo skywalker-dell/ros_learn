@@ -1,0 +1,6 @@
+devel_space: /home/zwx/Documents/ros/learn/devel
+install: false
+install_space: /home/zwx/Documents/ros/learn/install
+profile: default
+source_space: /home/zwx/Documents/ros/learn/src
+workspace: /home/zwx/Documents/ros/learn
