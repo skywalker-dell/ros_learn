@@ -1,16 +1,18 @@
 <launch>
-    <!--将机器人的urdf模型加载到参数服务器-->>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 -1.57 0 -1.57 /support /support_depth"/>
+
+    <!--将机器人的urdf模型加载到参数服务器-->
     <param name="robot_description" command="$(find xacro)/xacro $(find nav_demo)/urdf/car.urdf.xacro" />
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
-    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
     
     <!--启动gazebo-->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find nav_demo)/worlds/demo.world" />
+        <arg name="world_name" value="$(find nav_demo)/worlds/demo.world"/>
     </include>
 
     <!--在gazebo中显示机器人模型-->
     <node pkg="gazebo_ros" type="spawn_model" name="load_moded_to_gazebo" args="-urdf -model car -param robot_description" />
-
 
 </launch>

@@ -1,1 +1,0 @@
-/home/zwx/Documents/ros/learn/devel/.private/action_demo/share/gennodejs/ros/action_demo/msg/AddIntsActionResult.js

@@ -44,6 +44,34 @@
         <material>Gazebo/White</material>
     </gazebo>
 
+
+    <!-- 固定
+    <link name="fixed_point1">
+      <visual>
+        <geometry>
+          <sphere radius="0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="fixed_point2">
+      <visual>
+        <geometry>
+          <sphere radius="0.001" />
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="fixed_points_link" type="fixed">
+        <parent link="fixed_point1" />
+        <child link="fixed_point2" />
+        <origin xyz="${support_x} ${support_y} ${support_z}" />
+    </joint> -->
+
+
+
+
+
     <!-- 雷达属性 -->
     <xacro:property name="laser_length" value="0.05" /> <!-- 雷达长度 -->
     <xacro:property name="laser_radius" value="0.03" /> <!-- 雷达半径 -->

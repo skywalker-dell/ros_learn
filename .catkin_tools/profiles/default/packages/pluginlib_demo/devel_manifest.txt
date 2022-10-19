@@ -1,5 +1,0 @@
-pluginlib_demo
-/home/zwx/Documents/ros/learn/devel/.private/pluginlib_demo/cmake.lock /home/zwx/Documents/ros/learn/devel/./cmake.lock
-/home/zwx/Documents/ros/learn/devel/.private/pluginlib_demo/lib/pkgconfig/pluginlib_demo.pc /home/zwx/Documents/ros/learn/devel/lib/pkgconfig/pluginlib_demo.pc
-/home/zwx/Documents/ros/learn/devel/.private/pluginlib_demo/share/pluginlib_demo/cmake/pluginlib_demoConfig-version.cmake /home/zwx/Documents/ros/learn/devel/share/pluginlib_demo/cmake/pluginlib_demoConfig-version.cmake
-/home/zwx/Documents/ros/learn/devel/.private/pluginlib_demo/share/pluginlib_demo/cmake/pluginlib_demoConfig.cmake /home/zwx/Documents/ros/learn/devel/share/pluginlib_demo/cmake/pluginlib_demoConfig.cmake

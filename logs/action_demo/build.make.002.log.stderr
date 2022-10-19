@@ -1,7 +1,0 @@
-[01m[K/home/zwx/Documents/ros/learn/src/action_demo/src/action_server.cpp:3:10:[m[K [01;31m[Kfatal error: [m[Kaction_demo/AddIntsAction.h: No such file or directory
-    3 | #include [01;31m[K"action_demo/AddIntsAction.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
-compilation terminated.
-make[2]: *** [CMakeFiles/srv.dir/build.make:63: CMakeFiles/srv.dir/src/action_server.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:517: CMakeFiles/srv.dir/all] Error 2
-make: *** [Makefile:141: all] Error 2

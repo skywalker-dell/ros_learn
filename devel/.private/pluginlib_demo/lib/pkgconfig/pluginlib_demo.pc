@@ -1,8 +1,0 @@
-prefix=/home/zwx/Documents/ros/learn/devel/.private/pluginlib_demo
-
-Name: pluginlib_demo
-Description: Description of pluginlib_demo
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

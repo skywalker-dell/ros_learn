@@ -6,4 +6,5 @@
     <xacro:include filename="laser.urdf.xacro" />
     <xacro:include filename="sensor/sensor_laser.urdf.xacro" />
     <xacro:include filename="sensor/sensor_motion.urdf.xacro" />
+    <xacro:include filename="sensor/depth_camera.urdf.xacro" />
 </robot>

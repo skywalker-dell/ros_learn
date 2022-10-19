@@ -1,1 +1,0 @@
-/home/zwx/Documents/ros/learn/devel/.private/catkin_tools_prebuild/setup.sh

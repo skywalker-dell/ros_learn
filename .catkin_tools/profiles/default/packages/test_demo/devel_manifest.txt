@@ -1,5 +1,0 @@
-test_demo
-/home/zwx/Documents/ros/learn/devel/.private/test_demo/cmake.lock /home/zwx/Documents/ros/learn/devel/./cmake.lock
-/home/zwx/Documents/ros/learn/devel/.private/test_demo/lib/pkgconfig/test_demo.pc /home/zwx/Documents/ros/learn/devel/lib/pkgconfig/test_demo.pc
-/home/zwx/Documents/ros/learn/devel/.private/test_demo/share/test_demo/cmake/test_demoConfig.cmake /home/zwx/Documents/ros/learn/devel/share/test_demo/cmake/test_demoConfig.cmake
-/home/zwx/Documents/ros/learn/devel/.private/test_demo/share/test_demo/cmake/test_demoConfig-version.cmake /home/zwx/Documents/ros/learn/devel/share/test_demo/cmake/test_demoConfig-version.cmake

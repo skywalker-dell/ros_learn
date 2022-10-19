@@ -1,5 +1,0 @@
-_workspace_packages=( ${(Q)"${(z)$(<<\EO:_workspace_packages
-'action_demo' 'nav_demo' 'pluginlib_demo' 'test_demo'
-EO:_workspace_packages
-)}"} )
-_workspace_cache_file_path='/home/zwx/Documents/ros/learn/.catkin_tools/cache'

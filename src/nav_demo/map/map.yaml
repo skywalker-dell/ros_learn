@@ -1,4 +1,4 @@
-image: /home/zwx/Documents/ros/learn/src/nav_demo/map/map.pgm
+image: /home/arx/Documents/ros/learn/src/nav_demo/map/map.pgm
 resolution: 0.050000
 origin: [-50.000000, -50.000000, 0.000000]
 negate: 0

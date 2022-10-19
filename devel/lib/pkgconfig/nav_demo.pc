@@ -1,1 +1,0 @@
-/home/zwx/Documents/ros/learn/devel/.private/nav_demo/lib/pkgconfig/nav_demo.pc
