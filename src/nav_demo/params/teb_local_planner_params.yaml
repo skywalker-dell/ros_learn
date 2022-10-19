@@ -26,8 +26,8 @@ TebLocalPlannerROS:
 
       
   # Robot
-  acc_lim_x: 20.0
-  max_vel_x: 3.0
+  acc_lim_x: 1.0
+  max_vel_x: 1.0
   max_vel_x_backwards: 0.05 # 该参数不能为零或者是负数
 
   acc_lim_y: 0.0
