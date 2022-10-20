@@ -152,6 +152,11 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
+add_executable(transformer src/publish_map_meta_data.cpp)
+target_link_libraries(transformer ${catkin_LIBRARIES})
+#add_dependencies(transformer beginner_tutorials_generate_messages_cpp)
+
+
 #############
 ## Install ##
 #############
