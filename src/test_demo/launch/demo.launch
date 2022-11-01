@@ -1,8 +1,0 @@
-<launch>
-
-    <param name="p1" value="100" />
-    <node pkg="turtlesim" type="turtlesim_node" name="">
-        <param name="p2" value="200" />
-    </node>
-
-</launch>

@@ -1,0 +1,9 @@
+<launch>
+    <node pkg="terrain_action" type="terrain_action" name="terrain_action_node" output="screen">
+        <param name="odom_topic" value="odom" />
+        <param name="octomap_topic" value="octomap_binary" />
+        <param name="robot_max_height" value="0.7" /> <!-- 机器人最大高度-->
+        <param name="robot_min_height" value="0.5" /> <!--机器人蹲下时的最大高度-->
+        <param name="robot_width" value = "0.4" />
+    </node>
+</launch>
