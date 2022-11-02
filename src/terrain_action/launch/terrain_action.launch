@@ -1,9 +1,16 @@
 <launch>
     <node pkg="terrain_action" type="terrain_action" name="terrain_action_node" output="screen">
-        <param name="odom_topic" value="odom" />
-        <param name="octomap_topic" value="octomap_binary" />
-        <param name="robot_max_height" value="0.7" /> <!-- 机器人最大高度-->
-        <param name="robot_min_height" value="0.5" /> <!--机器人蹲下时的最大高度-->
-        <param name="robot_width" value = "0.4" />
+
+        <param name="odom_topic_name" type="string" value="/odom" />
+        <param name="octomap_topic_name" type="string" value="/octomap_binary" />
+        <param name="elevation_map_topic_name" type="string" value="/elevation_mapping/elevation_map" />
+        <param name="robot_base_footprint_frame_id" type="string" value="base_footprint" />
+        <param name="elevation_map_frame_id" type="string" value="odom" />
+        
+        <param name="robot_up_height" type="double" value="0.7" /> <!-- 机器人站起的高度-->
+        <param name="robot_down_height" type="double" value="0.5" /> <!--机器人蹲下的高度-->
+        <param name="min_jump_height" type="double" value="0.05" /> <!--高于该值触发跳跃-->
+        <param name="max_step_height" type="double" value="0.2" /> <!--最大能够跳跃的台阶高度-->
+        <param name="robot_width" type="double" value = "0.4" /> <!-- 机器人宽度-->
     </node>
 </launch>

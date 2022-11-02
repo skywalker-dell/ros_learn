@@ -9,7 +9,7 @@
     
     <!--启动gazebo-->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find nav_demo)/worlds/demo.world"/>
+        <arg name="world_name" value="$(find nav_demo)/worlds/test.world"/>
     </include>
 
     <!--在gazebo中显示机器人模型-->

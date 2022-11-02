@@ -1,32 +1,37 @@
 [
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"terrain_action\\\" -I/home/arx/Documents/ros/learn/src/terrain_action/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /opt/ros/noetic/include -isystem /usr/include/eigen3    -mfpmath=sse -msse -msse2 -msse3 -mssse3 -o CMakeFiles/terrain_action_node.dir/src/terrain_action_node.cpp.o -c /home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action_node.cpp",
+  "command": "/usr/bin/c++  -DEIGEN_DENSEBASE_PLUGIN=\\\"grid_map_core/eigen_plugins/DenseBasePlugin.hpp\\\" -DEIGEN_FUNCTORS_PLUGIN=\\\"grid_map_core/eigen_plugins/FunctorsPlugin.hpp\\\" -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"terrain_action\\\" -I/home/arx/Documents/ros/learn/src/terrain_action/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/opencv4 -isystem /opt/ros/noetic/include -isystem /usr/include/eigen3  -O3 -DNDEBUG   -mfpmath=sse -msse -msse2 -msse3 -mssse3 -o CMakeFiles/terrain_action_node.dir/src/terrain_action_node.cpp.o -c /home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action_node.cpp",
   "file": "/home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action_node.cpp"
 },
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action",
-  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"terrain_action\\\" -Dterrain_action_EXPORTS -I/home/arx/Documents/ros/learn/src/terrain_action/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /opt/ros/noetic/include -isystem /usr/include/eigen3  -fPIC   -mfpmath=sse -msse -msse2 -msse3 -mssse3 -o CMakeFiles/terrain_action.dir/src/terrain_action.cpp.o -c /home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action.cpp",
+  "command": "/usr/bin/c++  -DEIGEN_DENSEBASE_PLUGIN=\\\"grid_map_core/eigen_plugins/DenseBasePlugin.hpp\\\" -DEIGEN_FUNCTORS_PLUGIN=\\\"grid_map_core/eigen_plugins/FunctorsPlugin.hpp\\\" -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"terrain_action\\\" -Drobot_shape_visualization_EXPORTS -I/home/arx/Documents/ros/learn/src/terrain_action/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/opencv4  -O3 -DNDEBUG -fPIC   -o CMakeFiles/robot_shape_visualization.dir/src/robot_shape_visualization.cpp.o -c /home/arx/Documents/ros/learn/src/terrain_action/src/robot_shape_visualization.cpp",
+  "file": "/home/arx/Documents/ros/learn/src/terrain_action/src/robot_shape_visualization.cpp"
+},
+{
+  "directory": "/home/arx/Documents/ros/learn/build/terrain_action",
+  "command": "/usr/bin/c++  -DEIGEN_DENSEBASE_PLUGIN=\\\"grid_map_core/eigen_plugins/DenseBasePlugin.hpp\\\" -DEIGEN_FUNCTORS_PLUGIN=\\\"grid_map_core/eigen_plugins/FunctorsPlugin.hpp\\\" -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"terrain_action\\\" -Dterrain_action_EXPORTS -I/home/arx/Documents/ros/learn/src/terrain_action/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/opencv4 -isystem /opt/ros/noetic/include -isystem /usr/include/eigen3  -O3 -DNDEBUG -fPIC   -mfpmath=sse -msse -msse2 -msse3 -mssse3 -o CMakeFiles/terrain_action.dir/src/terrain_action.cpp.o -c /home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action.cpp",
   "file": "/home/arx/Documents/ros/learn/src/terrain_action/src/terrain_action.cpp"
 },
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action/gtest/googlemock",
-  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_main_EXPORTS -isystem /usr/src/googletest/googlemock/include -isystem /usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/googletest/googlemock/src/gmock_main.cc",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_main_EXPORTS -isystem /usr/src/googletest/googlemock/include -isystem /usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -O3 -DNDEBUG -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/googletest/googlemock/src/gmock_main.cc",
   "file": "/usr/src/googletest/googlemock/src/gmock_main.cc"
 },
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action/gtest/googlemock",
-  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_EXPORTS -I/usr/src/googletest/googlemock/include -I/usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /usr/src/googletest/googlemock/src/gmock-all.cc",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_EXPORTS -I/usr/src/googletest/googlemock/include -I/usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -O3 -DNDEBUG -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /usr/src/googletest/googlemock/src/gmock-all.cc",
   "file": "/usr/src/googletest/googlemock/src/gmock-all.cc"
 },
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action/gtest/googletest",
-  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_main_EXPORTS -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/googletest/googletest/src/gtest_main.cc",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_main_EXPORTS -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -O3 -DNDEBUG -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/googletest/googletest/src/gtest_main.cc",
   "file": "/usr/src/googletest/googletest/src/gtest_main.cc"
 },
 {
   "directory": "/home/arx/Documents/ros/learn/build/terrain_action/gtest/googletest",
-  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_EXPORTS -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/googletest/googletest/src/gtest-all.cc",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_EXPORTS -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest  -O3 -DNDEBUG -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/googletest/googletest/src/gtest-all.cc",
   "file": "/usr/src/googletest/googletest/src/gtest-all.cc"
 }
 ]

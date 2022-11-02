@@ -1,5 +1,4 @@
 <launch>
-  
   <node pkg="grid_map_visualization" type="grid_map_visualization" name="elevation_map_fused_visualization" output="screen">
    	<param name="grid_map_topic" value="/elevation_mapping/elevation_map" />
     <rosparam command="load" file="$(find nav_demo)/config/visualization/fused.yaml" />

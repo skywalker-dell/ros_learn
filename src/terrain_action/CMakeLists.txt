@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.0.2)
 project(terrain_action)
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+    roscpp
+    grid_map_core
+    grid_map_ros
+    grid_map_msgs
+    visualization_msgs
 )
 find_package (Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
@@ -31,13 +35,22 @@ target_link_libraries(terrain_action
         Eigen3::Eigen
         )
 
-add_executable(terrain_action_node src/terrain_action_node.cpp)
+add_library(robot_move_shape_visualization src/robot_move_region_visualization.cpp)
+target_link_libraries(robot_move_shape_visualization
+        ${catkin_LIBRARIES}
+        )
 
+add_executable(terrain_action_node src/terrain_action_node.cpp)
 target_link_libraries(terrain_action_node
     terrain_action
+    robot_move_shape_visualization
     ${catkin_LIBRARIES}
     fcl
     Eigen3::Eigen
 )
+
+
+
+
 set_target_properties(terrain_action_node PROPERTIES OUTPUT_NAME terrain_action)
 

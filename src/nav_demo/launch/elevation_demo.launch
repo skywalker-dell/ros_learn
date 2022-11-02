@@ -4,7 +4,6 @@
   <node pkg="elevation_mapping" type="elevation_mapping" name="elevation_mapping" output="screen">
     <rosparam command="load" file="$(find nav_demo)/config/robots/simple_demo_robot.yaml" />
     <rosparam command="load" file="$(find nav_demo)/config/elevation_maps/simple_demo_map.yaml" />
-    <!-- <rosparam command="load" file="$(find nav_demo)/config/postprocessing/postprocessor_pipeline.yaml" /> -->
   </node>
 
   <!-- Launch visualizations for the resulting elevation map -->
