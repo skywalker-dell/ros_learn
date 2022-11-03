@@ -1,13 +1,31 @@
 //
 // Created by arx on 22-10-31.
 //
+#include <iterator>
+#include <ros/init.h>
+#include <ros/time.h>
 #include <string>
+#include <tf2_ros/buffer.h>
+#include <thread>
 #include "terrain_action/terrain_action.h"
 #include "geometry_msgs/PointStamped.h"
-#include "tf2_ros/transform_listener.h"
+#include "chrono"
 
 
-ActionPlanner::ActionPlanner() {
+// 四边形的四个顶点分别为：(0, width/2) (length, width/2) (length, -width/2) (0, -width/2)
+static bool judgeContain(double width, double length, Eigen::Vector2d &point)
+{
+    bool x_ok = std::abs(point.x() - 0.5 * length) < 0.5 * length;
+    bool y_ok = std::abs(point.y() - 0.5 * width) < 0.5 * width;
+    if (x_ok && y_ok)
+        return true;
+    else
+        return false;
+}
+
+
+ActionPlanner::ActionPlanner(tf2_ros::Buffer &tf_buffer) : tf_buffer_(tf_buffer) 
+{
     private_nh_ = ros::NodeHandle("~");
 
     private_nh_.param("robot_up_height", robot_up_height_, 0.7);
@@ -22,9 +40,8 @@ ActionPlanner::ActionPlanner() {
     private_nh_.getParam("robot_base_footprint_frame_id", robot_base_footprint_frame_id_);
     private_nh_.getParam("elevation_map_frame_id", elevation_map_frame_id_);
 
-    odom_sub_ = private_nh_.subscribe<nav_msgs::Odometry>(odom_topic_name_, 1, &ActionPlanner::odomCb, this);
-    octomap_sub_ = private_nh_.subscribe<octomap_msgs::Octomap>(octomap_topic_name_, 1, &ActionPlanner::octomapCb, this);
     elevation_map_sub_ = private_nh_.subscribe<grid_map_msgs::GridMap>(elevation_map_topic_name_, 1, &ActionPlanner::elevationMapCb, this);
+    odom_sub_ = private_nh_.subscribe<nav_msgs::Odometry>(odom_topic_name_, 1, &ActionPlanner::odomCb, this);
 
     robot_move_region_visualization_.init();
 
@@ -33,10 +50,17 @@ ActionPlanner::ActionPlanner() {
 
 void ActionPlanner::run()
 {
+    ROS_INFO("start terrain_action_planner...");
     ros::Rate r(20);
     while(ros::ok())
     {
-        if (!if_msg_updated()) continue;
+        ros::spinOnce();
+        if (!if_msg_updated())
+        {
+            // std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            ros::Duration(0.5).sleep();
+            continue;
+        }
         act_based_on_elevation_map();
         r.sleep();
     }
@@ -46,13 +70,15 @@ bool ActionPlanner::if_msg_updated() const
 {
     auto now = ros::Time::now();
     auto delta_odom_time = (now - odom_msg_.header.stamp).toSec();
-    auto delta_elevation_map_time = (now - elevation_map_ptr_->info.header.stamp).toSec();
-    if (delta_odom_time < 0.5 && delta_elevation_map_time < 0.5)
+    auto delta_elevation_map_time = (now - ros::Time().fromNSec(elevation_map_.getTimestamp())).toSec();
+    if (delta_odom_time < 3.0 && delta_elevation_map_time < 3.0)
     {
         return true;
     }
     else
     {
+        // std::cout << delta_odom_time << ";" << delta_elevation_map_time << std::endl;
+        // ROS_WARN("terrain_action_planer error: msg is outdated");
         return false;
     }
 }
@@ -63,103 +89,107 @@ void ActionPlanner::act_based_on_elevation_map() const
     auto vel = odom_msg_.twist.twist.linear;
     double car_speed = sqrt(pow(vel.x, 2) + pow(vel.y, 2) + pow(vel.z, 2));
     if (car_speed < 0.1) return;
-    robot_move_region_visualization_.visualize(robot_width_,  car_speed * 1.0);
 
-    grid_map::GridMap map;
-    grid_map::GridMapRosConverter::fromMessage(*elevation_map_ptr_, map);
-    double resolution = elevation_map_ptr_->info.resolution;
 
-    double x_start = 0.0;
-    double x_end =  vel.x * 1.0;
-    double y_start = -0.5 * robot_width_;
-    double y_end = 0.5 * robot_width_;
-    Eigen::Vector2d up_left(x_start, y_end);
-    Eigen::Vector2d up_right(x_end, y_end);
-    Eigen::Vector2d down_right(x_end, y_start);
-    Eigen::Vector2d down_left(x_start, y_start);
-
-    int x_num = std::floor((x_end - x_start) / resolution);
-    int y_num = std::floor((y_end - y_start) / resolution);
-
-    std::vector<Eigen::Vector2d> robot_move_region_points;
-    for (int i = 0; i <= x_num; ++i)
-    {
-        for (int j = 0; j <= y_num; ++j)
-        {
-            robot_move_region_points.emplace_back(Eigen::Vector2d(x_start+i*resolution, y_start+i*resolution));
-        }
-    }
-
-    tf2_ros::Buffer buffer;
-    tf2_ros::TransformListener listener(buffer);
-//    for (auto &point: robot_move_region_points)
-//    {
-//        geometry_msgs::PointStamped point_base_footprint;
-//        point_base_footprint.header.stamp = elevation_map_ptr_->info.header.stamp;
-//        point_base_footprint.header.frame_id = robot_base_footprint_frame_id_;
-//        point_base_footprint.point.x = point.x();
-//        point_base_footprint.point.y = point.y();
-//        point_base_footprint.point.z = 0.0;
-//        geometry_msgs::PointStamped point_odom;
-//        point_odom = buffer.transform(point_base_footprint, robot_base_footprint_frame_id_);
-//        point.x() = point_odom.point.x;
-//        point.y() = point_odom.point.y;
-//    }
-
-    std::vector<grid_map::Position> high_points;
-    std::vector<grid_map::Position> low_points;
-    for (grid_map::GridMapIterator iter(map); !iter.isPastEnd(); ++iter)
+    std::vector<grid_map::Position> all_region_high_points;
+    std::vector<grid_map::Position> all_region_low_points;
+    for (grid_map::GridMapIterator iter(elevation_map_); !iter.isPastEnd(); ++iter)
     {
         grid_map::Position position;
-        map.getPosition(*iter, position);
-        double height = map.at("elevation", *iter);
+        elevation_map_.getPosition(*iter, position);
+        double height = elevation_map_.at("elevation", *iter);
         if (height > robot_down_height_)
         {
-            high_points.emplace_back(position);
+            all_region_high_points.emplace_back(position);
         }
         else if (height > min_jump_height_ && height < max_step_height_)
         {
-            low_points.emplace_back(position);
+            all_region_low_points.emplace_back(position);
         }
     }
-    const int min_points_num = 5;
-    if (high_points.size() > low_points.size() && high_points.size() > min_points_num) // 蹲下
+
+    for (auto &point :all_region_high_points)
     {
-        ;
+        geometry_msgs::PointStamped point_with_elevation_map_frame_id;
+        point_with_elevation_map_frame_id.header.stamp = ros::Time().fromNSec(elevation_map_.getTimestamp());
+
+        point_with_elevation_map_frame_id.header.frame_id = elevation_map_frame_id_;
+        point_with_elevation_map_frame_id.point.x = point.x();
+        point_with_elevation_map_frame_id.point.y = point.y();
+        point_with_elevation_map_frame_id.point.z = 0.0;
+        geometry_msgs::PointStamped point_with_robot_base_footprint_id;
+        point_with_robot_base_footprint_id = tf_buffer_.transform(point_with_elevation_map_frame_id, robot_base_footprint_frame_id_);
+        point.x() = point_with_robot_base_footprint_id.point.x;
+        point.y() = point_with_robot_base_footprint_id.point.y;
     }
-    else if (low_points.size() > high_points.size() && low_points.size() > min_points_num) // 跳跃
+    for (auto &point :all_region_low_points)
     {
-        ;
+        geometry_msgs::PointStamped point_with_elevation_map_frame_id;
+        point_with_elevation_map_frame_id.header.stamp = ros::Time().fromNSec(elevation_map_.getTimestamp());
+        point_with_elevation_map_frame_id.header.frame_id = elevation_map_frame_id_;
+        point_with_elevation_map_frame_id.point.x = point.x();
+        point_with_elevation_map_frame_id.point.y = point.y();
+        point_with_elevation_map_frame_id.point.z = 0.0;
+        geometry_msgs::PointStamped point_with_robot_base_footprint_id;
+        point_with_robot_base_footprint_id = tf_buffer_.transform(point_with_elevation_map_frame_id, robot_base_footprint_frame_id_);
+        point.x() = point_with_robot_base_footprint_id.point.x;
+        point.y() = point_with_robot_base_footprint_id.point.y;
+    }
+
+    std::vector<grid_map::Position> robot_move_shape_region_high_points;
+    std::vector<grid_map::Position> robot_move_shape_region_low_points;
+    for (auto &point :all_region_high_points)
+    {
+        if (judgeContain(robot_width_, (vel.x * 1.0), point))
+        {
+            robot_move_shape_region_high_points.emplace_back(point);
+        }
+    }
+    for (auto &point :all_region_low_points)
+    {
+        if (judgeContain(robot_width_, (vel.x * 1.0), point))
+        {
+            robot_move_shape_region_low_points.emplace_back(point);
+        }
+    }
+
+    const int min_points_num = 5;
+    if (all_region_high_points.size() > min_points_num) // 蹲下
+    {
+        ROS_WARN("down");
+    } else {
+        ROS_WARN("up");
+    }
+    if (all_region_low_points.size() > min_points_num) // 跳跃
+    {
+        std::sort(robot_move_shape_region_low_points.begin(), robot_move_shape_region_low_points.end(),
+                  [&](auto a, auto b){return a.x() < b.x();});
+        if (robot_move_shape_region_low_points[0].x() < 0.6)
+        {
+            ROS_WARN("jump!");
+        }
+        else
+        {
+            ROS_WARN("ready to jump");
+        }
     }
 }
 
 void ActionPlanner::odomCb(const nav_msgs::Odometry::ConstPtr &odom_ptr)
 {
     odom_msg_ = *odom_ptr;
-    robot_move_region_visualization_.visualize(robot_width_,   1.0);
-
-
+    robot_move_region_visualization_.visualize(robot_width_, 1.0); // TODO: 待删除
 }
 
 void ActionPlanner::elevationMapCb(const grid_map_msgs::GridMap::ConstPtr &grid_map_ptr)
 {
-
-    elevation_map_ptr_ = grid_map_ptr;
-
-    // 可视化机器人未来1s的运动空间
-
-    // 计算当前机器人未来通行空间的点
-    double resolution = grid_map_ptr->info.resolution;
-
-    double x_start = this->odom_msg_.pose.pose.position.x;
-    double x_end = x_start + this->odom_msg_.twist.twist.linear.x * 1.0;
-    double y_start = this->odom_msg_.pose.pose.position.y;
-    double y_end = y_start + this->odom_msg_.twist.twist.linear.y * 1.0;
-
-
+    auto now = ros::Time::now();
+    grid_map::GridMapRosConverter::fromMessage(*grid_map_ptr, elevation_map_);
 }
 
-void ActionPlanner::octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr) {
+
+
+//void ActionPlanner::octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr) {
 //    ros::Time start = ros::Time::now();
 //    octomap::AbstractOcTree* abstract_octotree_ptr = octomap_msgs::binaryMsgToMap(*octomap_msg_ptr);
 //
@@ -197,7 +227,7 @@ void ActionPlanner::octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg
 //    ros::Time end = ros::Time::now();
 //    if ((end - start).toSec() > 1.0)
 //        ROS_WARN("Time consume: %f", (end-start).toSec());
-}
+//}
 
 
 

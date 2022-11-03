@@ -6,6 +6,7 @@
 #define LEARN_TERRAIN_ACTION_NODE_H
 
 #include <memory>
+#include <tf2_ros/buffer.h>
 #include "ros/ros.h"
 #include "nav_msgs/Odometry.h"
 #include "octomap_msgs/Octomap.h"
@@ -14,7 +15,8 @@
 #include "grid_map_msgs/GridMap.h"
 #include "robot_move_region_visualization.h"
 #include "grid_map_ros/grid_map_ros.hpp"
-
+#include "tf2_ros/transform_listener.h"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 
 // 导航在构建栅格地图只需要起跳高度到蹲下的最高高度即可。
 
@@ -27,14 +29,14 @@
 
 class ActionPlanner {
 public:
-    ActionPlanner();
+    ActionPlanner(tf2_ros::Buffer &tf_buffer);
 
 private:
     void run();
     bool if_msg_updated() const;
     void act_based_on_elevation_map() const;
     void odomCb(const nav_msgs::Odometry::ConstPtr &odom_ptr);
-    void octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr);
+//    void octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr);
     void elevationMapCb(const grid_map_msgs::GridMap::ConstPtr &grid_map_ptr);
 
 private:
@@ -43,9 +45,11 @@ private:
     ros::Subscriber elevation_map_sub_; // 订阅高程图
     ros::ServiceClient jump_cli_; // 发送跳跃请求
     nav_msgs::Odometry odom_msg_;
-    grid_map_msgs::GridMap::ConstPtr elevation_map_ptr_;
+    grid_map::GridMap elevation_map_;
+
     RobotMoveRegionVisualization robot_move_region_visualization_;
     ros::NodeHandle private_nh_;
+    tf2_ros::Buffer &tf_buffer_;
 
 
 private:

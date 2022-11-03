@@ -7,8 +7,10 @@
 
 int main(int argc, char *argv[]) {
     ros::init(argc, argv, "terrain_action_node");
-    ActionPlanner action_planner;
-    ros::spin();
+    tf2_ros::Buffer buffer;
+    tf2_ros::TransformListener listener(buffer);
+    ActionPlanner action_planner(buffer);
+    // ros::spin();
     return 0;
 }
 

@@ -31,7 +31,7 @@ void RobotMoveRegionVisualization::init() {
     pub_ = nh.advertise<visualization_msgs::Marker>("robot_shape_region", 1);
 }
 
-void RobotMoveRegionVisualization::visualize(double robot_width, double move_length) const{
+void RobotMoveRegionVisualization::visualize(double robot_width, double move_length) {
     marker_.header.frame_id = "base_footprint";
     marker_.header.stamp = ros::Time::now();
     marker_.points[0].x = 0;

@@ -11,7 +11,7 @@
 class RobotMoveRegionVisualization{
 public:
     void init();
-    void visualize(double robot_width, double move_length) const;
+    void visualize(double robot_width, double move_length);
 
 private:
     visualization_msgs::Marker marker_;

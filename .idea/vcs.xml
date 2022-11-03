@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/elevation_mapping" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/elevation_mapping/elevation_mapping/src/kindr_ros" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/kindr_ros" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/message_logger" vcs="Git" />
   </component>

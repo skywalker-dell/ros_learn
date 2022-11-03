@@ -1,12 +1,19 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(terrain_action)
 
-find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    grid_map_core
-    grid_map_ros
-    grid_map_msgs
-    visualization_msgs
+find_package(catkin REQUIRED
+    COMPONENTS
+        roscpp
+        grid_map_core
+        grid_map_ros
+        grid_map_msgs
+        visualization_msgs
+        geometry_msgs
+        tf2
+        tf2_ros
+        tf2
+        tf2_msgs
+        tf2_geometry_msgs
 )
 find_package (Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
@@ -48,8 +55,6 @@ target_link_libraries(terrain_action_node
     fcl
     Eigen3::Eigen
 )
-
-
 
 
 set_target_properties(terrain_action_node PROPERTIES OUTPUT_NAME terrain_action)
