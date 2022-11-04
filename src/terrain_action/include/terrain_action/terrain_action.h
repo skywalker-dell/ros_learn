@@ -29,12 +29,12 @@
 
 class ActionPlanner {
 public:
-    ActionPlanner(tf2_ros::Buffer &tf_buffer);
+    explicit ActionPlanner(tf2_ros::Buffer &tf_buffer);
 
 private:
     void run();
-    bool if_msg_updated() const;
-    void act_based_on_elevation_map() const;
+    bool ifMsgUpdated() const;
+    void actBasedOnElevationMap() const;
     void odomCb(const nav_msgs::Odometry::ConstPtr &odom_ptr);
 //    void octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr);
     void elevationMapCb(const grid_map_msgs::GridMap::ConstPtr &grid_map_ptr);

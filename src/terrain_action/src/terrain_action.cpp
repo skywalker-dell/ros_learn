@@ -55,18 +55,17 @@ void ActionPlanner::run()
     while(ros::ok())
     {
         ros::spinOnce();
-        if (!if_msg_updated())
+        if (!ifMsgUpdated())
         {
-            // std::this_thread::sleep_for(std::chrono::milliseconds(500));
             ros::Duration(0.5).sleep();
             continue;
         }
-        act_based_on_elevation_map();
+        actBasedOnElevationMap();
         r.sleep();
     }
 }
 
-bool ActionPlanner::if_msg_updated() const
+bool ActionPlanner::ifMsgUpdated() const
 {
     auto now = ros::Time::now();
     auto delta_odom_time = (now - odom_msg_.header.stamp).toSec();
@@ -77,14 +76,13 @@ bool ActionPlanner::if_msg_updated() const
     }
     else
     {
-        // std::cout << delta_odom_time << ";" << delta_elevation_map_time << std::endl;
-        // ROS_WARN("terrain_action_planer error: msg is outdated");
+        ROS_WARN("terrain_action_planer error: msg is outdated");
         return false;
     }
 }
 
 // 统一在robot_base_footprint 坐标系下做碰撞检测
-void ActionPlanner::act_based_on_elevation_map() const
+void ActionPlanner::actBasedOnElevationMap() const
 {
     auto vel = odom_msg_.twist.twist.linear;
     double car_speed = sqrt(pow(vel.x, 2) + pow(vel.y, 2) + pow(vel.z, 2));
