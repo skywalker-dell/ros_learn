@@ -4,6 +4,13 @@
   <node pkg="elevation_mapping" type="elevation_mapping" name="elevation_mapping" output="screen">
     <rosparam command="load" file="$(find nav_demo)/config/robots/simple_demo_robot.yaml" />
     <rosparam command="load" file="$(find nav_demo)/config/elevation_maps/simple_demo_map.yaml" />
+    <param name="min_update_rate" type="double" value="10.0" />
+    <param name="fused_map_publishing_rate" type="double" value="10.0" />
+    <param name="min_update_rate" type="double" value="10.0" />
+    <param name="min_update_rate" type="double" value="10.0" />
+    <param name="num_callback_threads" type="int" value="5" />
+
+
   </node>
 
   <!-- Launch visualizations for the resulting elevation map -->

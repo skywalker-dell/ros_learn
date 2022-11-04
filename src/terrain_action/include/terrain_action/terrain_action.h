@@ -11,7 +11,6 @@
 #include "nav_msgs/Odometry.h"
 #include "octomap_msgs/Octomap.h"
 #include "octomap_msgs/conversions.h"
-#include "fcl/fcl.h"
 #include "grid_map_msgs/GridMap.h"
 #include "robot_move_region_visualization.h"
 #include "grid_map_ros/grid_map_ros.hpp"
@@ -36,12 +35,10 @@ private:
     bool ifMsgUpdated() const;
     void actBasedOnElevationMap() const;
     void odomCb(const nav_msgs::Odometry::ConstPtr &odom_ptr);
-//    void octomapCb(const octomap_msgs::Octomap::ConstPtr &octomap_msg_ptr);
     void elevationMapCb(const grid_map_msgs::GridMap::ConstPtr &grid_map_ptr);
 
 private:
     ros::Subscriber odom_sub_; // 订阅里程计信息
-    ros::Subscriber octomap_sub_;  // 订阅八叉树地图
     ros::Subscriber elevation_map_sub_; // 订阅高程图
     ros::ServiceClient jump_cli_; // 发送跳跃请求
     nav_msgs::Odometry odom_msg_;
@@ -65,6 +62,7 @@ private:
     double min_jump_height_; // 高于该值触发跳跃
     double max_step_height_; // 最大能够跳跃的台阶高度
     double robot_width_; // 机器人宽度
+    double robot_length_;
 };
 
 

@@ -17,7 +17,6 @@ find_package(catkin REQUIRED
 )
 find_package (Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
-find_package(fcl REQUIRED)
 
 
 catkin_package(
@@ -25,8 +24,6 @@ catkin_package(
         include
         ${EIGEN3_INCLUDE_DIRS}
 )
-
-
 
 include_directories(
         include
@@ -38,7 +35,6 @@ include_directories(
 add_library(terrain_action src/terrain_action.cpp)
 target_link_libraries(terrain_action
         ${catkin_LIBRARIES}
-        fcl
         Eigen3::Eigen
         )
 
@@ -52,7 +48,6 @@ target_link_libraries(terrain_action_node
     terrain_action
     robot_move_shape_visualization
     ${catkin_LIBRARIES}
-    fcl
     Eigen3::Eigen
 )
 

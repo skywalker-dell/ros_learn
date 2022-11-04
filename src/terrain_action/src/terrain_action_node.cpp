@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     tf2_ros::Buffer buffer;
     tf2_ros::TransformListener listener(buffer);
     ActionPlanner action_planner(buffer);
-    // ros::spin();
+    ros::spin();
     return 0;
 }
 

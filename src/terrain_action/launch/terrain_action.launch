@@ -11,6 +11,7 @@
         <param name="robot_down_height" type="double" value="0.5" /> <!--机器人蹲下的高度-->
         <param name="min_jump_height" type="double" value="0.05" /> <!--高于该值触发跳跃-->
         <param name="max_step_height" type="double" value="0.2" /> <!--最大能够跳跃的台阶高度-->
-        <param name="robot_width" type="double" value = "0.4" /> <!-- 机器人宽度-->
+        <param name="robot_width" type="double" value="0.4" /> <!-- 机器人宽度-->
+        <param name="robot_length" type="double" value="0.4" />
     </node>
 </launch>
