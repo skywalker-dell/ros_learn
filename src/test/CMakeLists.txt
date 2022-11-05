@@ -205,5 +205,12 @@ include_directories(
 # catkin_add_nosetests(test)
 
 
-add_executable(test_demo src/main.cpp)
-target_link_libraries(test_demo ${catkin_LIBRARIES})
+add_executable(demo src/demo.cpp)
+target_link_libraries(demo ${catkin_LIBRARIES})
+
+
+add_executable(sub src/sub.cpp)
+target_link_libraries(sub ${catkin_LIBRARIES})
+
+add_executable(talker src/talker.cpp)
+target_link_libraries(talker ${catkin_LIBRARIES})

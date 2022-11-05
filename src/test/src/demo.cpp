@@ -6,17 +6,21 @@
 #include "ros/time.h"
 
 
-void cb(const grid_map_msgs::GridMapConstPtr &ptr)
+void func()
 {
-    auto now = ros::Time::now();
-    ROS_INFO("%lf", (now - ptr->info.header.stamp).toSec());
+    try {
+        throw (1);
+    } catch (...) {
+        std::cout << "sss" << std::endl;
+    }
 }
 
 int main(int argc, char *argv[])
 {
     ros::init(argc, argv, "test_demo_node");
     ros::NodeHandle nh;
-    auto sub = nh.subscribe<grid_map_msgs::GridMap>("/elevation_mapping/elevation_map", 1, cb);
-    ros::spin();
-    return 0;
+    while(ros::ok())
+    {
+        func();
+    }
 }

@@ -25,11 +25,11 @@ public:
     return data_;
   };
 
- std::pair<T &, std::unique_lock<std::mutex>> getDataToWrite()
- {
-    std::unique_lock<std::mutex> data_write_guard{mutex_};
-    return std::make_pair(data_, data_write_guard);
- }
+  std::pair<T &, std::lock_guard<std::mutex>> getDataToWrite()
+  {
+    std::unique_lock<std::mutex> data_write_guard{ mutex_ };
+    return {data_, std::move(data_write_guard)};
+  }
 
 private:
   T data_;
