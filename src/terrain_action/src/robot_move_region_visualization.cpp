@@ -19,7 +19,7 @@ static void setupColor(const int color_value, std_msgs::ColorRGBA& color)
 
 void RobotMoveRegionVisualization::init()
 {
-  ros::NodeHandle nh;
+  ros::NodeHandle nh("~");
 
   marker_.ns = "robot_shape_region";
   marker_.lifetime = ros::Duration();

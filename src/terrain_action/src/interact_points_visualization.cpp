@@ -5,7 +5,7 @@
 
 void terrain_action::InteractPointsVisualization::init()
 {
-  ros::NodeHandle nh;
+  ros::NodeHandle nh("~");
   low_points_.ns = "interact_low_points";
   high_points_.ns = "interact_high_points";
   low_points_.lifetime = high_points_.lifetime = ros::Duration();

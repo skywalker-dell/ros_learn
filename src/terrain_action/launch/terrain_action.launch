@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="terrain_action" type="terrain_action" name="terrain_action_node" output="screen">
+    <node pkg="terrain_action" type="terrain_action" name="terrain_action" output="screen">
         <param name="odom_topic_name" type="string" value="/odom" />
         <param name="octomap_topic_name" type="string" value="/octomap_binary" />
         <param name="elevation_map_topic_name" type="string" value="/elevation_mapping/elevation_map" />

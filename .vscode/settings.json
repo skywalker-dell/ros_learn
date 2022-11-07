@@ -74,7 +74,11 @@
         "valarray": "cpp",
         "variant": "cpp",
         "*.ipp": "cpp",
-        "core": "cpp"
+        "core": "cpp",
+        "eigen": "cpp",
+        "sparse": "cpp",
+        "dense": "cpp",
+        "cholesky": "cpp"
     },
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,

@@ -16,20 +16,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a251049a-262d-4bfc-a474-86ec1e9ad76c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/compile_commands.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/kindr_ros/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/kindr_ros/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/kindr_rviz_plugins/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/kindr_rviz_plugins/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/multi_dof_joint_trajectory_rviz_plugins/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/multi_dof_joint_trajectory_rviz_plugins/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nav_demo/config/postprocessing/postprocessor_pipeline.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/nav_demo/config/postprocessing/postprocessor_pipeline.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nav_demo/launch/elevation_demo.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/nav_demo/launch/elevation_demo.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/terrain_action/include/terrain_action/robot_move_region_visualization.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/include/terrain_action/robot_move_region_visualization1.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/terrain_action/include/terrain_action/terrain_action.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/include/terrain_action/terrain_action.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/terrain_action/launch/terrain_action.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/launch/terrain_action.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrain_action/src/interact_points_visualization.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/src/interact_points_visualization.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/terrain_action/src/robot_move_region_visualization.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/src/robot_move_region_visualization.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/terrain_action/src/terrain_action.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/src/terrain_action.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/terrain_action/src/terrain_action_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/src/terrain_action_node.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/src/demo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/src/demo.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667794734275</updated>
-      <workItem from="1667794736283" duration="683000" />
+      <workItem from="1667794736283" duration="1328000" />
     </task>
     <servers />
   </component>

@@ -11,6 +11,7 @@
 #include <thread>
 #include "geometry_msgs/Point.h"
 #include "grid_map_core/GridMap.hpp"
+#include "ros/node_handle.h"
 #include "terrain_action/terrain_action.h"
 #include "grid_map_ros/grid_map_ros.hpp"
 #include "geometry_msgs/PointStamped.h"
@@ -70,9 +71,10 @@ ActionPlanner::ActionPlanner(tf2_ros::Buffer& tf_buffer) : tf_buffer_(tf_buffer)
   private_nh_.param("robot_base_footprint_frame_id", robot_base_footprint_frame_id_, std::string("base_footprint"));
   private_nh_.param("elevation_map_frame_id", elevation_map_frame_id_, std::string("odom"));
 
+  ros::NodeHandle nh;
   elevation_map_sub_ =
-      private_nh_.subscribe<grid_map_msgs::GridMap>(elevation_map_topic_name_, 1, &ActionPlanner::elevationMapCb, this);
-  odom_sub_ = private_nh_.subscribe<nav_msgs::Odometry>(odom_topic_name_, 1, &ActionPlanner::odomCb, this);
+      nh.subscribe<grid_map_msgs::GridMap>(elevation_map_topic_name_, 1, &ActionPlanner::elevationMapCb, this);
+  odom_sub_ = nh.subscribe<nav_msgs::Odometry>(odom_topic_name_, 1, &ActionPlanner::odomCb, this);
 
   robot_move_region_visualization_.init();
   interact_points_visualization_.init();
@@ -105,8 +107,7 @@ bool ActionPlanner::ifMsgUpdated() const
   auto now = ros::Time::now();
   auto delta_odom_time = (now - odom_msg_.header.stamp).toSec();
   auto delta_elevation_map_time = (now - ros::Time().fromNSec(elevation_map_.getTimestamp())).toSec();
-
-  std::cout << delta_odom_time << ";" << delta_elevation_map_time << std::endl;
+  // std::cout << delta_odom_time << ";" << delta_elevation_map_time << std::endl;
   if (delta_odom_time < 5.0 && delta_elevation_map_time < 5.0)
   {
     return true;
@@ -149,6 +150,8 @@ void ActionPlanner::actBasedOnElevationMap() const
   // 将elevation map的点由原始的不动的世界坐标系转换到随着机器人动而运动的robot_base_footprint
   std::vector<geometry_msgs::Point> robot_move_shape_region_high_points;
   std::vector<geometry_msgs::Point> robot_move_shape_region_low_points;
+
+  ROS_INFO("delta_time: %lf", (ros::Time().fromNSec(elevation_map_.getTimestamp()) - odom_msg_.header.stamp).toSec());
 
   try
   {
@@ -222,16 +225,12 @@ void ActionPlanner::actBasedOnElevationMap() const
 
 void ActionPlanner::odomCb(const nav_msgs::Odometry::ConstPtr& odom_ptr)
 {
-  // auto now = ros::Time::now();
-  // ROS_INFO("%lf", (now - odom_ptr->header.stamp).toSec());
   odom_msg_ = *odom_ptr;
   robot_move_region_visualization_.visualize(robot_width_, 1.0);  // TODO: 待删除
 }
 
 void ActionPlanner::elevationMapCb(const grid_map_msgs::GridMap::ConstPtr& grid_map_ptr)
 {
-  // auto now = ros::Time::now();
-  // ROS_INFO("%lf", (now - grid_map_ptr->info.header.stamp).toSec());
   grid_map::GridMapRosConverter::fromMessage(*grid_map_ptr, elevation_map_);
 }
 
