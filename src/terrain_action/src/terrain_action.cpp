@@ -63,17 +63,19 @@ ActionPlanner::ActionPlanner(tf2_ros::Buffer& tf_buffer) : tf_buffer_(tf_buffer)
   private_nh_.param("robot_width", robot_width_, 0.4);
   private_nh_.param("robot_length", robot_length_, 0.4);
 
-  private_nh_.getParam("odom_topic_name", odom_topic_name_);
-  private_nh_.getParam("octomap_topic_name", octomap_topic_name_);
-  private_nh_.getParam("elevation_map_topic_name", elevation_map_topic_name_);
-  private_nh_.getParam("robot_base_footprint_frame_id", robot_base_footprint_frame_id_);
-  private_nh_.getParam("elevation_map_frame_id", elevation_map_frame_id_);
+  private_nh_.param("odom_topic_name", odom_topic_name_, std::string("/odom"));
+  private_nh_.param("octomap_topic_name", octomap_topic_name_, std::string("/octomap_binary"));
+  private_nh_.param("elevation_map_topic_name", elevation_map_topic_name_,
+                    std::string("/elevation_mapping/elevation_map"));
+  private_nh_.param("robot_base_footprint_frame_id", robot_base_footprint_frame_id_, std::string("base_footprint"));
+  private_nh_.param("elevation_map_frame_id", elevation_map_frame_id_, std::string("odom"));
 
   elevation_map_sub_ =
       private_nh_.subscribe<grid_map_msgs::GridMap>(elevation_map_topic_name_, 1, &ActionPlanner::elevationMapCb, this);
   odom_sub_ = private_nh_.subscribe<nav_msgs::Odometry>(odom_topic_name_, 1, &ActionPlanner::odomCb, this);
 
   robot_move_region_visualization_.init();
+  interact_points_visualization_.init();
 
   run();
 }
@@ -134,7 +136,7 @@ void ActionPlanner::actBasedOnElevationMap() const
     grid_map::Position position;
     elevation_map_.getPosition(*iter, position);
     double height = elevation_map_.at("elevation", *iter);
-    if (!std::isnan(height) && height > robot_down_height_)
+    if (!std::isnan(height) && height > robot_down_height_ && height < robot_up_height_)
     {
       all_region_high_points.emplace_back(position);
     }
@@ -150,9 +152,9 @@ void ActionPlanner::actBasedOnElevationMap() const
 
   try
   {
-    geometry_msgs::TransformStamped transform =
-        tf_buffer_.lookupTransform(robot_base_footprint_frame_id_, elevation_map_frame_id_,
-                                   ros::Time().fromNSec(elevation_map_.getTimestamp()), ros::Duration(1.0));
+    geometry_msgs::TransformStamped transform = tf_buffer_.lookupTransform(
+        robot_base_footprint_frame_id_, odom_msg_.header.stamp, elevation_map_frame_id_,
+        ros::Time().fromNSec(elevation_map_.getTimestamp()), elevation_map_frame_id_, ros::Duration(1.0));
 
     if (all_region_high_points.size() > 0)
     {
@@ -185,13 +187,17 @@ void ActionPlanner::actBasedOnElevationMap() const
       }
     }
   }
+
   catch (tf2::TransformException& ex)
   {
     ROS_WARN("%s", ex.what());
   }
 
-  const int min_points_num = 5;
-  if (all_region_high_points.size() > min_points_num)  // 蹲下
+  interact_points_visualization_.visualize(robot_move_shape_region_low_points, robot_move_shape_region_high_points,
+                                           robot_base_footprint_frame_id_, odom_msg_.header.stamp);
+
+  const int min_points_num = 3;
+  if (robot_move_shape_region_high_points.size() > min_points_num)  // 蹲下
   {
     ROS_INFO("down");
   }

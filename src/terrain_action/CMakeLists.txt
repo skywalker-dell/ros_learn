@@ -33,23 +33,30 @@ include_directories(
         ${FCL_INCLUDE_DIRS}
 )
 
-add_library(terrain_action src/terrain_action.cpp)
-target_link_libraries(terrain_action
-        ${catkin_LIBRARIES}
-        Eigen3::Eigen
-        )
-
 add_library(robot_move_shape_visualization src/robot_move_region_visualization.cpp)
 target_link_libraries(robot_move_shape_visualization
         ${catkin_LIBRARIES}
         )
 
+add_library(interac_points_visualization src/interact_points_visualization.cpp)
+target_link_libraries(interac_points_visualization
+        ${catkin_LIBRARIES}
+)
+
+add_library(terrain_action src/terrain_action.cpp)
+target_link_libraries(terrain_action
+        ${catkin_LIBRARIES}
+        Eigen3::Eigen
+        robot_move_shape_visualization
+        interac_points_visualization
+        )
+
+
+
 add_executable(terrain_action_node src/terrain_action_node.cpp)
 target_link_libraries(terrain_action_node
     terrain_action
-    robot_move_shape_visualization
     ${catkin_LIBRARIES}
-    Eigen3::Eigen
 )
 
 

@@ -2,8 +2,8 @@
 // Created by arx on 22-10-31.
 //
 
-#ifndef LEARN_TERRAIN_ACTION_NODE_H
-#define LEARN_TERRAIN_ACTION_NODE_H
+#ifndef LEARN_TERRAIN_ACTION_H
+#define LEARN_TERRAIN_ACTION_H
 
 #include <memory>
 #include <tf2_ros/buffer.h>
@@ -17,6 +17,7 @@
 #include "tf2_ros/transform_listener.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 #include "thread_safe_data_wrapper.h"
+#include "interact_points_visualization.h"
 
 // 导航在构建栅格地图只需要起跳高度到蹲下的最高高度即可。
 
@@ -51,6 +52,7 @@ private:
   ros::NodeHandle private_nh_;
   tf2_ros::Buffer& tf_buffer_;
   RobotMoveRegionVisualization robot_move_region_visualization_;
+  mutable InteractPointsVisualization interact_points_visualization_;
 
 private:
   std::string odom_topic_name_;
@@ -70,4 +72,4 @@ private:
 
 }  // namespace terrain_action
 
-#endif  // LEARN_TERRAIN_ACTION_NODE_H
+#endif  // LEARN_TERRAIN_ACTION__H

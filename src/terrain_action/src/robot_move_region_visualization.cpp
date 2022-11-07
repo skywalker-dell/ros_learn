@@ -5,7 +5,7 @@
 
 namespace terrain_action
 {
-static void setup_color(const int color_value, std_msgs::ColorRGBA& color)
+static void setupColor(const int color_value, std_msgs::ColorRGBA& color)
 {
   Eigen::Vector3f color_vector;
   color_vector(0) = (color_value >> 16) & 0x0000ff;
@@ -29,7 +29,7 @@ void RobotMoveRegionVisualization::init()
   marker_.points.resize(n_vertices_);
 
   std_msgs::ColorRGBA color_;
-  setup_color(color_value_, color_);
+  setupColor(color_value_, color_);
   marker_.colors.resize(n_vertices_, color_);
   pub_ = nh.advertise<visualization_msgs::Marker>("robot_shape_region", 1);
 }

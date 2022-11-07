@@ -10,6 +10,5 @@ int main(int argc, char* argv[])
   tf2_ros::Buffer buffer;
   tf2_ros::TransformListener listener(buffer);
   terrain_action::ActionPlanner action_planner(buffer);
-  ros::spin();
   return 0;
 }

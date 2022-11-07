@@ -1,12 +1,10 @@
 <launch>
     <node pkg="terrain_action" type="terrain_action" name="terrain_action_node" output="screen">
-
         <param name="odom_topic_name" type="string" value="/odom" />
         <param name="octomap_topic_name" type="string" value="/octomap_binary" />
         <param name="elevation_map_topic_name" type="string" value="/elevation_mapping/elevation_map" />
         <param name="robot_base_footprint_frame_id" type="string" value="base_footprint" />
         <param name="elevation_map_frame_id" type="string" value="odom" />
-        
         <param name="robot_up_height" type="double" value="0.7" /> <!-- 机器人站起的高度-->
         <param name="robot_down_height" type="double" value="0.5" /> <!--机器人蹲下的高度-->
         <param name="min_jump_height" type="double" value="0.05" /> <!--高于该值触发跳跃-->
