@@ -78,9 +78,14 @@
         "eigen": "cpp",
         "sparse": "cpp",
         "dense": "cpp",
-        "cholesky": "cpp"
+        "cholesky": "cpp",
+        "slist": "cpp",
+        "specialfunctions": "cpp"
     },
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,
-    "files.autoSave": "afterDelay"
+    "files.autoSave": "afterDelay",
+    "python.analysis.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
 }

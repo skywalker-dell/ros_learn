@@ -151,7 +151,7 @@ void ActionPlanner::actBasedOnElevationMap() const
   std::vector<geometry_msgs::Point> robot_move_shape_region_high_points;
   std::vector<geometry_msgs::Point> robot_move_shape_region_low_points;
 
-  ROS_INFO("delta_time: %lf", (ros::Time().fromNSec(elevation_map_.getTimestamp()) - odom_msg_.header.stamp).toSec());
+  // ROS_INFO("delta_time: %lf", (ros::Time().fromNSec(elevation_map_.getTimestamp()) - odom_msg_.header.stamp).toSec());
 
   try
   {
@@ -231,6 +231,9 @@ void ActionPlanner::odomCb(const nav_msgs::Odometry::ConstPtr& odom_ptr)
 
 void ActionPlanner::elevationMapCb(const grid_map_msgs::GridMap::ConstPtr& grid_map_ptr)
 {
+  auto now = ros::Time::now();
+  auto latency = (now - grid_map_ptr->info.header.stamp).toSec();
+  ROS_INFO("%lf", latency);
   grid_map::GridMapRosConverter::fromMessage(*grid_map_ptr, elevation_map_);
 }
 

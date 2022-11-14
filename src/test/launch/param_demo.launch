@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="test" type="param_demo" name="param_demo_node">
+        <param name="param" type="int" value="1" />
+    </node>
+</launch>
