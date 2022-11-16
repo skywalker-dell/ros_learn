@@ -12,6 +12,7 @@
 #include "geometry_msgs/Point.h"
 #include "grid_map_core/GridMap.hpp"
 #include "ros/node_handle.h"
+#include "ros/timer.h"
 #include "terrain_action/terrain_action.h"
 #include "grid_map_ros/grid_map_ros.hpp"
 #include "geometry_msgs/PointStamped.h"
@@ -107,8 +108,8 @@ bool ActionPlanner::ifMsgUpdated() const
   auto now = ros::Time::now();
   auto delta_odom_time = (now - odom_msg_.header.stamp).toSec();
   auto delta_elevation_map_time = (now - ros::Time().fromNSec(elevation_map_.getTimestamp())).toSec();
-  // std::cout << delta_odom_time << ";" << delta_elevation_map_time << std::endl;
-  if (delta_odom_time < 5.0 && delta_elevation_map_time < 5.0)
+  ROS_DEBUG("delta_odom_time: %lf; delta_elevation_map_time: %lf", delta_odom_time, delta_elevation_map_time);
+  if (delta_odom_time < 2.0 && delta_elevation_map_time < 2.0)
   {
     return true;
   }

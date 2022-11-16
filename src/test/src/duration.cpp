@@ -16,11 +16,14 @@ int main(int argc, char* argv[])
     ros::init(argc, argv, "duration_demo_node");
     ros::start();
     auto last = ros::Time::now();
-    ros::Duration(2.0).sleep();
+    ros::Duration(0.5).sleep();
     auto now = ros::Time::now();
-    if ((last - now) > ros::Duration(1.0))
+    if ((last - now) < ros::Duration(-1.0))
     {
         std::cout << "sss" << std::endl;
+    }
+    else {
+        std::cout << "aaa" << std::endl;
     }
     return 0;
 }

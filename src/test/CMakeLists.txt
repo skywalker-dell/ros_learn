@@ -10,6 +10,7 @@ project(test)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   grid_map_msgs
+  message_filters
 )
 
 ## System dependencies are found with CMake's conventions
@@ -229,6 +230,17 @@ target_link_libraries(sub ${catkin_LIBRARIES})
 add_executable(talker src/talker.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
 
-
 add_executable(points_cnt_demo src/points_size_count.cpp)
 target_link_libraries(points_cnt_demo ${catkin_LIBRARIES})
+
+add_executable(message_filter_demo src/message_filter_demo.cpp)
+target_link_libraries(message_filter_demo ${catkin_LIBRARIES})
+
+add_executable(talker_for_message_filter_demo src/talker_for_message_filter_demo.cpp)
+target_link_libraries(talker_for_message_filter_demo ${catkin_LIBRARIES})
+
+add_executable(mutiple_param_sub_demo src/mutiple_param_sub_demo.cpp)
+target_link_libraries(mutiple_param_sub_demo ${catkin_LIBRARIES})
+
+add_executable(thread_num_demo src/thread_num.cpp)
+target_link_libraries(thread_num_demo ${catkin_LIBRARIES})

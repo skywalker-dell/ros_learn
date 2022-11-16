@@ -80,7 +80,9 @@
         "dense": "cpp",
         "cholesky": "cpp",
         "slist": "cpp",
-        "specialfunctions": "cpp"
+        "specialfunctions": "cpp",
+        "sparsecore": "cpp",
+        "*.txx": "cpp"
     },
     "editor.defaultFormatter": "xaver.clang-format",
     "editor.formatOnSave": true,

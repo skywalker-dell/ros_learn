@@ -1431,8 +1431,48 @@
   },
   {
     "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/thread_num_demo.dir/src/thread_num.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/thread_num.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/thread_num.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/mutiple_param_sub_demo.dir/src/mutiple_param_sub_demo.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/mutiple_param_sub_demo.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/mutiple_param_sub_demo.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
     "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/sub.dir/src/sub.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/sub.cpp",
     "file": "/home/arx/Documents/ros/learn/src/test/src/sub.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/duration.dir/src/duration.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/duration.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/duration.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/message_filter_demo.dir/src/message_filter_demo.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/message_filter_demo.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/message_filter_demo.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/param_demo.dir/src/param_test.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/param_test.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/param_test.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/talker_for_message_filter_demo.dir/src/talker_for_message_filter_demo.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/talker_for_message_filter_demo.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/talker_for_message_filter_demo.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/mutiple_thread_demo.dir/src/mutiple_thread.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/mutiple_thread.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/mutiple_thread.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/spin_demo.dir/src/spin.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/spin.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/spin.cpp"
   },
   {
     "directory": "/home/arx/Documents/ros/learn/build/test",
@@ -1441,8 +1481,18 @@
   },
   {
     "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/points_cnt_demo.dir/src/points_size_count.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/points_size_count.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/points_size_count.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
     "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/talker.dir/src/talker.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/talker.cpp",
     "file": "/home/arx/Documents/ros/learn/src/test/src/talker.cpp"
+  },
+  {
+    "directory": "/home/arx/Documents/ros/learn/build/test",
+    "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"test\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -o CMakeFiles/timer_demo.dir/src/timer_demo.cpp.o -c /home/arx/Documents/ros/learn/src/test/src/timer_demo.cpp",
+    "file": "/home/arx/Documents/ros/learn/src/test/src/timer_demo.cpp"
   },
   {
     "directory": "/home/arx/Documents/ros/learn/build/test/gtest/googlemock",

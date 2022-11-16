@@ -17,12 +17,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a251049a-262d-4bfc-a474-86ec1e9ad76c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/elevation_mapping" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/compile_commands.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/kindr_ros/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/kindr_ros/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/kindr_rviz_plugins/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/kindr_rviz_plugins/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kindr_ros/multi_dof_joint_trajectory_rviz_plugins/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/kindr_ros/multi_dof_joint_trajectory_rviz_plugins/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nav_demo/config/tmp.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/src/nav_demo/config/tmp.rviz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slam_msg" beforeDir="false" afterPath="$PROJECT_DIR$/src/slam_msg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam_msg/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam_msg/slam_msg/CMakeLists.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam_msg/slam_msg/msg/Keyframe.msg" beforeDir="false" />
@@ -33,7 +34,11 @@
       <change beforePath="$PROJECT_DIR$/src/slam_msg/slam_msg/script/gps_reader_new.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam_msg/slam_msg/script/readbag.m" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam_msg/slam_msg/script/serial_buffer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/terrain_action/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrain_action/src/terrain_action.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain_action/src/terrain_action.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/src/duration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/src/duration.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/src/sub.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/src/sub.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/src/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/src/test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,17 +70,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.advertisement.text.overridden&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.advertisement.text.overridden": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -86,6 +92,8 @@
       <updated>1667794734275</updated>
       <workItem from="1667794736283" duration="1926000" />
       <workItem from="1668056206825" duration="15000" />
+      <workItem from="1668582725863" duration="93000" />
+      <workItem from="1668582826082" duration="308000" />
     </task>
     <servers />
   </component>

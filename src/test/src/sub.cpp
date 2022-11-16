@@ -7,7 +7,7 @@
 #include "std_msgs/String.h"
 
 
-void cb(const std_msgs::StringConstPtr &ptr)
+void cb(const std_msgs::String ptr)
 {
     ROS_WARN("aaaa");
     ros::Duration(1).sleep();
