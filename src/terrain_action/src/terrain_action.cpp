@@ -152,7 +152,8 @@ void ActionPlanner::actBasedOnElevationMap() const
   std::vector<geometry_msgs::Point> robot_move_shape_region_high_points;
   std::vector<geometry_msgs::Point> robot_move_shape_region_low_points;
 
-  // ROS_INFO("delta_time: %lf", (ros::Time().fromNSec(elevation_map_.getTimestamp()) - odom_msg_.header.stamp).toSec());
+  // ROS_INFO("delta_time: %lf", (ros::Time().fromNSec(elevation_map_.getTimestamp()) -
+  // odom_msg_.header.stamp).toSec());
 
   try
   {

@@ -1,5 +1,10 @@
 .catkin_tools/
 .cache/
+.idea/
+.vscode/
 build/
 devel/
 logs/
+cmake-build-*
+.catkin_workspace
+compile_commands.json
