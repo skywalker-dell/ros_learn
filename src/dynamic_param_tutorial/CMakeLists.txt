@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(test)
+project(dynamic_param_tutorial)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,11 +8,20 @@ project(test)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  dynamic_reconfigure
   roscpp
-  grid_map_msgs
-  message_filters
-
+  rospy
+  std_msgs
 )
+
+generate_dynamic_reconfigure_options(
+  cfg/demo.cfg
+)
+
+add_executable(help_node src/help.cpp)
+target_link_libraries(help_node ${catkin_LIBRARIES})
+
+add_dependencies(help_node ${PROJECT_NAME}_gencfg)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -71,7 +80,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   std_msgs
 # )
 
 ################################################
@@ -105,8 +114,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES test
-#  CATKIN_DEPENDS roscpp
+#  LIBRARIES dynamic_param_tutorial
+#  CATKIN_DEPENDS dynamic_reconfigure roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -123,7 +132,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/test.cpp
+#   src/${PROJECT_NAME}/dynamic_param_tutorial.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -134,7 +143,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/test_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/dynamic_param_tutorial_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -198,55 +207,10 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_test.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_dynamic_param_tutorial.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-
-add_executable(demo src/demo.cpp)
-target_link_libraries(demo ${catkin_LIBRARIES})
-
-add_executable(timer_demo src/timer_demo.cpp)
-target_link_libraries(timer_demo ${catkin_LIBRARIES})
-
-add_executable(param_demo src/param_test.cpp)
-target_link_libraries(param_demo ${catkin_LIBRARIES})
-
-add_executable(mutiple_thread_demo src/mutiple_thread.cpp)
-target_link_libraries(mutiple_thread_demo ${catkin_LIBRARIES})
-
-add_executable(spin_demo src/spin.cpp)
-target_link_libraries(spin_demo ${catkin_LIBRARIES})
-
-add_executable(duration src/duration.cpp)
-target_link_libraries(duration ${catkin_LIBRARIES})
-
-add_executable(sub src/sub.cpp)
-target_link_libraries(sub ${catkin_LIBRARIES})
-
-add_executable(talker src/talker.cpp)
-target_link_libraries(talker ${catkin_LIBRARIES})
-
-add_executable(points_cnt_demo src/points_size_count.cpp)
-target_link_libraries(points_cnt_demo ${catkin_LIBRARIES})
-
-add_executable(message_filter_demo src/message_filter_demo.cpp)
-target_link_libraries(message_filter_demo ${catkin_LIBRARIES})
-
-add_executable(talker_for_message_filter_demo src/talker_for_message_filter_demo.cpp)
-target_link_libraries(talker_for_message_filter_demo ${catkin_LIBRARIES})
-
-add_executable(mutiple_param_sub_demo src/mutiple_param_sub_demo.cpp)
-target_link_libraries(mutiple_param_sub_demo ${catkin_LIBRARIES})
-
-add_executable(thread_num_demo src/thread_num.cpp)
-target_link_libraries(thread_num_demo ${catkin_LIBRARIES})
-
-file(GLOB_RECURSE srcs CONFIGURE_DEPENDS src/nodelet_demo.cpp include/*.h)
-add_library(MyNodeClass ${srcs})
-target_include_directories(MyNodeClass PUBLIC include)
-target_link_libraries(MyNodeClass ${catkin_LIBRARIES})

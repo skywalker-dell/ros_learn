@@ -1,0 +1,7 @@
+<library path="lib/libMyNodeClass">
+  <class name="example_pkg/MyNodeClass" type="example_pkg::MyNodeClass" base_class_type="nodelet::Nodelet">
+  <description>
+  This is my nodelet.
+  </description>
+  </class>
+</library>
