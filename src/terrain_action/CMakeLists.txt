@@ -12,12 +12,16 @@ find_package(catkin REQUIRED
         geometry_msgs
         tf2
         tf2_ros
-        tf2
         tf2_msgs
         tf2_geometry_msgs
+        pcl_ros
 )
 find_package (Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
+find_package(PCL REQUIRED)
+add_definitions(${PCL_DEFINITIONS})
+
+
 
 
 catkin_package(
@@ -30,7 +34,6 @@ include_directories(
         include
         ${catkin_INCLUDE_DIRS}
         ${Eigen_INCLUDE_DIRS}
-        ${FCL_INCLUDE_DIRS}
 )
 
 add_library(robot_move_shape_visualization src/robot_move_region_visualization.cpp)
@@ -58,6 +61,12 @@ target_link_libraries(terrain_action_node
     terrain_action
     ${catkin_LIBRARIES}
 )
+
+add_library(plane_detection_node src/plane_detect.cpp)
+target_link_libraries(plane_detection_node
+    ${catkin_LIBRARIES}
+)
+# target_include_directories(plane_detection_node ${PCL_INCLUDE_DIRS})
 
 
 set_target_properties(terrain_action_node PROPERTIES OUTPUT_NAME terrain_action)

@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" name="PlaneDetection" args="load terrain_action/PlaneDetection /camera/realsense2_camera_manager" output="screen">
+    <param name="pointclouds" type="string" value="/camera/depth/color/points" />
+  </node>
+</launch>

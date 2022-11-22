@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   grid_map_msgs
   message_filters
-
+  sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -250,3 +250,9 @@ file(GLOB_RECURSE srcs CONFIGURE_DEPENDS src/nodelet_demo.cpp include/*.h)
 add_library(MyNodeClass ${srcs})
 target_include_directories(MyNodeClass PUBLIC include)
 target_link_libraries(MyNodeClass ${catkin_LIBRARIES})
+
+
+
+
+add_executable(point_cloud_demo src/point_cloud_callack.cpp)
+target_link_libraries(point_cloud_demo ${catkin_LIBRARIES})

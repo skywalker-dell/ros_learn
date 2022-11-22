@@ -1,0 +1,3 @@
+<library path="lib/libplane_detection_node">
+  <class name="terrain_action/PlaneDetection" type="terrain_action::PlaneDetection" base_class_type="nodelet::Nodelet" />
+</library>
