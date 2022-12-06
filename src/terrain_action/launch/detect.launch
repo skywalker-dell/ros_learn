@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="terrain_action" type="detection_node" name="detection" output="screen">
+    </node>
+</launch>

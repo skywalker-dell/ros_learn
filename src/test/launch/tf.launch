@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="frame1_to_frame2" args="1 1 1 0 1 0 /frame1 /frame2 40" />
+</launch>

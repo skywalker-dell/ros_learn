@@ -1,6 +1,8 @@
-#include <terrain_action/plane_detect.h>
+#include <terrain_action/detect.h>
 #include <pcl-1.10/pcl/point_cloud.h>
 #include <pluginlib/class_list_macros.h>
+#include <boost/smart_ptr/make_shared_array.hpp>
+#include <memory>
 #include <pcl-1.10/pcl/impl/point_types.hpp>
 #include <string>
 #include "Eigen/src/Core/Matrix.h"
@@ -13,7 +15,11 @@
 #include "ros/node_handle.h"
 #include "ros/time.h"
 #include "sensor_msgs/PointCloud2.h"
+#include "tf/LinearMath/Transform.h"
+#include <tf/transform_datatypes.h>
+#include "tf/transform_listener.h"
 #include "tf2/transform_storage.h"
+#include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
 #include <Eigen/Eigen>
 #include <geometry_msgs/TransformStamped.h>
@@ -22,53 +28,49 @@
 #include <pcl/features/normal_3d_omp.h>
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/filters/extract_indices.h>
-#include <pcl/conversions.h>
 #include <Eigen/Eigen>
 #include <pcl_ros/transforms.h>
 
 namespace terrain_action
 {
-void PlaneDetection::onInit()
+Detection::Detection(tf::TransformListener& listener) : tf_listener_(listener)
 {
-  readParams();
-  ros::NodeHandle& nh = getNodeHandle();
-  ros::NodeHandle& private_nh_ = getPrivateNodeHandle();
-  points_sub_ = nh.subscribe("/camera/depth/color/points", 1, &PlaneDetection::pointsCallback, this);
+  // readParams();
+  points_sub_ = nh_.subscribe("/camera/depth/color/points", 1, &Detection::pointsCallback, this);
   std::string cropped_point_cloud_name;
   downsampled_pointcloud_pub_ = private_nh_.advertise<sensor_msgs::PointCloud2>("downsampled_pointcloud", 1, false);
   cropped_point_cloud_pub_ = private_nh_.advertise<sensor_msgs::PointCloud2>("cropped_pointcloud", 1, false);
   plane_pointcloud_pub_ = private_nh_.advertise<sensor_msgs::PointCloud2>("plane_pointcloud", 1, false);
 }
 
-void PlaneDetection::pointsCallback(const sensor_msgs::PointCloud2ConstPtr& pointcloud_msg)
+void Detection::pointsCallback(const sensor_msgs::PointCloud2::Ptr& pointcloud_msg)
 {
   // 首先转换坐标系
   try
   {
-    sensor_msgs::PointCloud2* transformed_pointcloud_msg = new sensor_msgs::PointCloud2;
-    if (tf_buffer_.canTransform("robot_footprint", pointcloud_msg->header.frame_id, ros::Time(0)))
-    {
-      pcl_ros::transformPointCloud("robot_footprint", *pointcloud_msg, *transformed_pointcloud_msg, tf_buffer_);
-      ROS_INFO("transform success");
-    }
-    else
-    {
-      ROS_WARN("transform pointcloud error");
-      return;
-    }
+    pcl::PointCloud<point_type> pointcloud;              // 接收的点云
+    pcl::PointCloud<point_type> transformed_pointcloud;  // 转换到robot_foot[print的点云
+    pcl::fromROSMsg(*pointcloud_msg, pointcloud);
 
-    // pcl::PCLPointCloud2::Ptr pcl_pointcloud = boost::make_shared<pcl::PCLPointCloud2>();
-    // pcl_conversions::toPCL(*transformed_pointcloud_msg, *pcl_pointcloud);
+    tf::StampedTransform stamped_transform;
+    tf::Transform transform;
+    tf_listener_.lookupTransform("camera_depth_frame", pointcloud_msg->header.frame_id, ros::Time(0),
+                                 stamped_transform);
+    // 查询变换
+    transform = stamped_transform;
+    pcl_ros::transformPointCloud(pointcloud, transformed_pointcloud, transform);
+
+    pcl::PCLPointCloud2::Ptr transformed_pcl_pointcloud = boost::make_shared<pcl::PCLPointCloud2>();
+    pcl::toPCLPointCloud2(transformed_pointcloud,*transformed_pcl_pointcloud);
 
     // 降采样，同时去掉一些NaN值
-    pcl::VoxelGrid<pcl::PointCloud<point_type>> sor;
-    // pcl::PCLPointCloud2::Ptr downsampled_pcl_pointcloud = boost::make_shared<pcl::PCLPointCloud2>();
+    pcl::PCLPointCloud2::Ptr downsampled_pcl_pointcloud = boost::make_shared<pcl::PCLPointCloud2>();
     pcl::PointCloud<point_type>::Ptr downsampled_pointcloud = boost::make_shared<pcl::PointCloud<point_type>>();
-    // pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
-    sor.setInputCloud(transformed_pointcloud_msg);
-    sor.setLeafSize(0.05, 0.05, 0.05);
+    pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
+    sor.setInputCloud(transformed_pcl_pointcloud);
+    sor.setLeafSize(0.05, 0.03, 0.03);
     sor.filter(*downsampled_pcl_pointcloud);
-    // pcl::fromPCLPointCloud2(*downsampled_pcl_pointcloud, *downsampled_pointcloud);
+    pcl::fromPCLPointCloud2(*downsampled_pcl_pointcloud, *downsampled_pointcloud);
     downsampled_pointcloud_pub_.publish(downsampled_pointcloud);
 
     // 在z轴滤波， 去掉地面和高于一定值的点云
@@ -76,7 +78,7 @@ void PlaneDetection::pointsCallback(const sensor_msgs::PointCloud2ConstPtr& poin
     pcl::PassThrough<point_type> pass_filter;
     pass_filter.setInputCloud(downsampled_pointcloud);
     pass_filter.setFilterFieldName("z");
-    pass_filter.setFilterLimits(-0.4 + 0.03, -0.4 + 0.25);
+    pass_filter.setFilterLimits(0.03, 0.25);
     pass_filter.filter(*cropped_pointcloud);
     cropped_point_cloud_pub_.publish(cropped_pointcloud);
     if (cropped_pointcloud->size() < 10)
@@ -130,19 +132,18 @@ void PlaneDetection::pointsCallback(const sensor_msgs::PointCloud2ConstPtr& poin
     double distance = std::abs(D) / sqrt(pow(A, 2) + pow(B, 2) + pow(C, 2));
     ROS_WARN("distance: %lf", distance);
   }
-  catch (tf2::TransformException& ex)
+  catch (...)
   {
-    ROS_WARN("%s", ex.what());
+    ROS_WARN("transform error");
   }
 }
 
-bool PlaneDetection::readParams()
+bool Detection::readParams()
 {
-  ros::NodeHandle private_nh_ = getPrivateNodeHandle();
+  ros::NodeHandle private_nh_;
   private_nh_.param<std::string>("pointcloud_in_name_", pointcloud_in_name_, "pointcloud_in_name");
   private_nh_.param<std::string>("pointcloud_in_name_", pointcloud_in_name_, "pointcloud_in_name");
   return true;
 }
 
 }  // namespace terrain_action
-PLUGINLIB_EXPORT_CLASS(terrain_action::PlaneDetection, nodelet::Nodelet)

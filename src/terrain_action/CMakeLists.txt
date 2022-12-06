@@ -5,7 +5,10 @@ set(CMAKE_BUILD_TYPE "Release")
 find_package(catkin REQUIRED
     COMPONENTS
         roscpp
+        rospy
+        sensor_msgs
         grid_map_core
+        pcl_conversions
         grid_map_ros
         grid_map_msgs
         visualization_msgs
@@ -18,7 +21,7 @@ find_package(catkin REQUIRED
 )
 find_package (Eigen3 REQUIRED)
 add_definitions(${EIGEN3_DEFINITIONS})
-find_package(PCL REQUIRED)
+find_package(PCL 1.2 REQUIRED)
 add_definitions(${PCL_DEFINITIONS})
 
 
@@ -34,6 +37,7 @@ include_directories(
         include
         ${catkin_INCLUDE_DIRS}
         ${Eigen_INCLUDE_DIRS}
+        ${PCL_INCLUDE_DIRS}
 )
 
 add_library(robot_move_shape_visualization src/robot_move_region_visualization.cpp)
@@ -62,12 +66,24 @@ target_link_libraries(terrain_action_node
     ${catkin_LIBRARIES}
 )
 
-add_library(plane_detection_node src/plane_detect.cpp)
-target_link_libraries(plane_detection_node
-    ${catkin_LIBRARIES}
-)
+# add_library(plane_detection_node src/plane_detect.cpp)
+# target_link_libraries(plane_detection_node
+#     ${catkin_LIBRARIES}
+# )
 # target_include_directories(plane_detection_node ${PCL_INCLUDE_DIRS})
 
+add_library(detection src/detect.cpp)
+target_link_libraries(detection
+    ${catkin_LIBRARIES}
+)
+target_include_directories(detection PUBLIC ${PCL_INCLUDE_DIRS})
 
+add_executable(detection_node src/detect_node.cpp)
+target_link_libraries(detection_node
+        detection
+    ${catkin_LIBRARIES}
+)
+
+link_directories(${PCL_LIBRARY_DIRS})
 set_target_properties(terrain_action_node PROPERTIES OUTPUT_NAME terrain_action)
 
